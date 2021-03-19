@@ -8,12 +8,12 @@ const quoteAuthor = document.querySelector('#quote-author');
 const getRandomQuote = (async function () {
   try {
     //Pobieramy odpowiedź z API z cytatem
-    let response = await fetch('http://quotes.stormconsultancy.co.uk/random.json');
+    let response = await fetch('https://private-anon-39966be192-goquotes.apiary-proxy.com/api/v1/random?count=1');
     //Parsujemy aby otrzymać JSON
     const quoteObject = await response.json();
     //Destrukturyzacja
-    const { author, quote } = quoteObject;
-    quoteText.innerHTML = quote;
+    const { author, text } = quoteObject.quotes[0];
+    quoteText.innerHTML = text;
     quoteAuthor.innerHTML = author;
   } catch (error) {
     console.log('ERROR in fetching random quote API', error);
