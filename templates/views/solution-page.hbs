@@ -19,7 +19,11 @@
   </head>
   <body>
     {{>logo}}
+    {{#if loggedIn}}
     {{>navbarAccount}}
+    {{else}}
+    {{>navbarNoAccount}}
+    {{/if}}
     <div style="display: none" id="lines">{{ linesNumber }}</div>
     <div style="display: none" id="solution-obj">{{ solution }}</div>
     <div class="container-fluid d-flex flex-column" id="solution-container" style="border: 1px solid black; width: 50%">

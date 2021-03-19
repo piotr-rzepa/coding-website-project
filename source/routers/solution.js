@@ -17,12 +17,23 @@ router.get('/solution/:id', async (req, res) => {
     const owner = await User.findById(solution.createdBy);
     if (!solution || !owner) throw new Error("couldn't find solution");
     //Wysyłamy ilość linii aby wygenerować odpowiednią ilość pól
-    res.render('solution-page', {
-      linesNumber: solution.body.length,
-      solution: JSON.stringify(solution),
-      author: owner.nickname,
-      title: solution.title,
-    });
+    if (req.cookies.JWT === null) {
+      res.render('solution-page', {
+        linesNumber: solution.body.length,
+        solution: JSON.stringify(solution),
+        author: owner.nickname,
+        title: solution.title,
+        loggedIn: true,
+      });
+    } else {
+      res.render('solution-page', {
+        linesNumber: solution.body.length,
+        solution: JSON.stringify(solution),
+        author: owner.nickname,
+        title: solution.title,
+        loggedIn: false,
+      });
+    }
   } catch (e) {
     //console.log(ERROR('/solutions', e));
   }
