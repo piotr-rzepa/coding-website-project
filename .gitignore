@@ -1,0 +1,8 @@
+node_modules
+config
+.eslintignore
+.eslintrc.json
+.vscode
+.idea
+source/requests.rest
+README.txt

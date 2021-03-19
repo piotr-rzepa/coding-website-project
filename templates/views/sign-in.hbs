@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sign up</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--Bootstrap CSS-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+
+    <!-- Font Awesome-->
+    <script src="https://kit.fontawesome.com/4b5aa82aa9.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body
+    class="d-flex"
+    style="
+      height: 100vh;
+      background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(159, 159, 255, 1) 50%, rgba(0, 212, 255, 1) 100%);
+    "
+  >
+    <div
+      class="card justify-content-center align-self-center container-fluid text-center col-sm-3 my-auto align-middle"
+      style="background: linear-gradient(90deg, rgba(148, 164, 255, 1) 0%, rgba(160, 148, 228, 1) 100%)"
+    >
+      <form class="card-body" action="" id="form-sign-in" method="POST">
+        <img class="mb-4 rounded" src="/images/python-code-unsplash.jpg" alt="" width="96" height="96" />
+        <h1 class="card-title h3 mb-3 font-weight-normal">Please sign in</h1>
+
+        <label for="inputEmail" class="sr-only">Email address</label>
+
+        <input
+          type="email"
+          name="email"
+          id="inputEmail"
+          class="form-control my-2"
+          placeholder="Email address"
+          autofocus
+          required
+        />
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="inputPassword"
+          class="form-control my-2"
+          placeholder="Password"
+          required
+        />
+        <div class="checkbox mb-3 my-2">
+          <label> <input type="checkbox" value="remember-me" id="chxb-remember" /> Remember me </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block my-2" type="submit">Sign in</button>
+        <p class="text-danger font-weight-bold" id="error-submit" style="visibility: hidden"></p>
+        <p class="mt-5 mb-3 text-muted">© 2020-2021</p>
+      </form>
+    </div>
+
+    {{>scripts}}
+    <script src="/javascripts/form-handler-in.js"></script>
+  </body>
+</html>

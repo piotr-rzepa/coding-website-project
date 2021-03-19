@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>solution</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--Bootstrap CSS-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/prism.css" />
+
+    <!-- Font Awesome-->
+    <script src="https://kit.fontawesome.com/4b5aa82aa9.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    {{>logo}}
+    {{>navbarAccount}}
+    <div style="display: none" id="lines">{{ linesNumber }}</div>
+    <div style="display: none" id="solution-obj">{{ solution }}</div>
+    <div class="container-fluid d-flex flex-column" id="solution-container" style="border: 1px solid black; width: 50%">
+      <h1 class="text-center">{{ title }}</h1>
+      <h4 class="text-center">Author: {{ author }}</h4>
+    </div>
+
+    <!--TODO: sweetalerty definicja -->
+    {{>footer}}
+    {{>scripts}}
+
+    <script src="/javascripts/prism.js"></script>
+    <script>
+      const solContainer = document.querySelector('#solution-container');
+      const linesNum = parseInt(document.querySelector('#lines').innerHTML);
+      const solutionObj = JSON.parse(document.querySelector('#solution-obj').innerHTML);
+      for (let i = 0; i < linesNum; ++i) {
+        const newLine = document.createElement('div');
+        newLine.classList.add('container-flud', 'd-flex');
+        newLine.innerHTML = ` <p class="p-1" style="width:10%">Line[${i + 1}]:</p>
+        <div class="text-center" style="background-color: lightgray; width: 90%;">
+          <pre><code class="text-wrap language-${solutionObj.language}" style="white-space: pre-line">${
+          solutionObj.body[i].line
+        }</code></pre>
+        </div>`;
+        solContainer.appendChild(newLine);
+        solContainer.appendChild(document.createElement('hr'));
+      }
+    </script>
+  </body>
+</html>

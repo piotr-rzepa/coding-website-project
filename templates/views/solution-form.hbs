@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>test-bootstrap</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--Bootstrap CSS-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+
+    <!-- Font Awesome-->
+    <script src="https://kit.fontawesome.com/4b5aa82aa9.js" crossorigin="anonymous"></script>
+
+
+     <!--jQuery-->
+     <script
+     src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+     crossorigin="anonymous"
+   ></script>
+   <!--Popper-->
+   <script
+     src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+     integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+     crossorigin="anonymous"
+   ></script>
+   
+    <!-- https://www.nicesnippets.com/blog/bootstrap-4-tags-input-example -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js" integrity="sha512-VvWznBcyBJK71YKEKDMpZ0pCVxjNuKwApp4zLF3ul+CiflQi6aIJR+aZCP/qWsoFBA28avL5T5HA+RE+zrGQYg==" crossorigin="anonymous"></script>
+
+       <!--Bootstrap JS-->
+       <script
+       src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+       integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+       crossorigin="anonymous"
+     ></script>
+
+    <style type="text/css">
+
+      .bootstrap-tagsinput{
+          width: 100%;
+      }
+      .label-info{
+          background-color: #17a2b8;
+
+      }
+      .label {
+          display: inline-block;
+          padding: .25em .4em;
+          font-size: 75%;
+          font-weight: 700;
+          line-height: 1;
+          text-align: center;
+          white-space: nowrap;
+          vertical-align: baseline;
+          border-radius: .25rem;
+          transition: color .15s ease-in-out,background-color .15s ease-in-out,
+          border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      }
+  </style>
+
+
+  </head>
+  <body class="">
+    {{>logo}}
+    {{>navbarAccount}}
+    <div
+      class="justify-content-center align-self-center container-fluid text-center col-sm-4 align-middle"
+      style="margin-top: 2rem"
+    >
+      <form class="was-validated" style="border: 1px solid black" id="sol-form">
+        <div class="container-fluid my-1">
+        <p class="h5">Select language:</p>
+        <div class="custom-control custom-radio form-check form-check-inline">
+            <input type="radio" class="form-check-input custom-control-input" name="inlineRadioOptions" id="customControlValidation1" value="C++" required>
+            <label class="custom-control-label" for="customControlValidation1" class="form-check-label">C++</label>
+        </div>
+          <div class="custom-control custom-radio form-check form-check-inline">
+            <input type="radio" class="form-check-input custom-control-input" name="inlineRadioOptions"id="customControlValidation2" value="C#" required>
+            <label class="custom-control-label" for="customControlValidation2">C#</label>
+
+          </div>
+              <div class="custom-control custom-radio form-check form-check-inline">
+            <input type="radio" class="form-check-input custom-control-input" name="inlineRadioOptions" id="customControlValidation3" value="Python" required>
+            <label class="custom-control-label" for="customControlValidation3">Python</label>
+          </div>
+
+            <div class="custom-control custom-radio form-check form-check-inline">
+            <input type="radio" class="form-check-input custom-control-input" name="inlineRadioOptions" id="customControlValidation4" value="JavaScript" required>
+            <label class="custom-control-label" for="customControlValidation4">JavaScript<label>
+            </div>
+             <div class="custom-control custom-radio form-check form-check-inline">
+            <input type="radio" class="form-check-input custom-control-input" name="inlineRadioOptions" id="customControlValidation5" value="Java" required>
+            <label class="custom-control-label" for="customControlValidation5">Java</label>
+          </div>
+          <div class="custom-control custom-radio form-check form-check-inline">
+            <input type="radio" class="form-check-input custom-control-input" name="inlineRadioOptions" id="customControlValidation6" value="Haskell" required>
+            <label class="custom-control-label" for="customControlValidation6">Haskell</label>
+            <div class="invalid-feedback">Select a language</div>
+        </div>
+      </div>
+
+      <div class="container-fluid my-2">
+        <label for="">Enter tags:</label>
+        <input type="text" data-role="tagsinput" name="tags" class="form-control" id="tags">
+      </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1" class="h4">Title of the problem</label>
+          <div class="input-group mb-2" id="ig-ele0">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Line [0]:</div>
+            </div>
+          <input
+            type="text"
+            class="form-control is-invalid"
+            name="title"
+            id="exampleFormControlInput1"
+            placeholder="example: Find smallest integer in an array"
+            required
+          />
+        </div>
+
+        <!-- <div class="input-group mb-2" id="ig-ele1">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Line 1</div>
+            </div>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
+            </textarea>
+            <div class="input-group-prepend">
+                <button type="button" class="btn btn-danger" onclick="removeElement(this.parentNode.parentNode)">&times;</button>
+              </div>
+        </div> -->
+
+        <button type="button" class="btn btn-primary mb-2" id="btn-add-field">Add field
+        </button>
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      </form>
+    </div>
+        <script src="/javascripts/solution-form-script.js" async defer></script>
+  </body>
+</html>

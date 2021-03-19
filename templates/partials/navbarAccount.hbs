@@ -1,0 +1,49 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark align-items-start">
+  <a href="/home/page1" class="navbar-brand">PBWCP</a>
+
+  <!--Włącza/wyłącza przycisk menu-->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <!-- Wyszukiwanie artykułów-->
+    <form class="form-inline ml-auto">
+      <div class="input-group mb-0">
+        <input type="text" class="form-control" id="editText-search" placeholder="Search" />
+        <div class="input-group-append">
+          <button class="btn btn-info" type="button" id="button-search"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+    <!--Wyszukiwanie artykułów koniec-->
+
+    <!--Logowanie oraz rejestracja-->
+    <ul class="nav navbar-nav">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          >{{user.name}}
+          <img src="/images/code-unsplash2.jpg" class="rounded" style="width: 30px; height: 30px" alt="" />
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" id="profile">Profile</a>
+          <a class="dropdown-item" href="#" id="new-solution">Add new solution</a>
+          <a class="dropdown-item" href="#" id="all-solutions">My solutions</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" id="logout">Log out</a>
+        </div>
+      </li>
+    </ul>
+    <!--Logowanie oraz rejestracja koniec-->
+  </div>
+  <script src="/javascripts/profile.js"></script>
+  <script src="/javascripts/search.js"></script>
+</nav>
+<!--Navbar koniec-->

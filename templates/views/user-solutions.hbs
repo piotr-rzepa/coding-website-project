@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Profile page</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--Bootstrap CSS-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+
+    <!-- Font Awesome-->
+    <script src="https://kit.fontawesome.com/4b5aa82aa9.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    {{>navbarAccount}}
+    <div class="container-fluid d-flex p-2 flex-column justify-content-center">
+        <div style="display:none" id="user-solutions">{{userSolutions}}</div>
+        </div>
+
+    </div>
+    <!--TODO: sweetalerty definicja -->
+    {{>footer}}
+    {{>scripts}}
+    {{>sweetalert2}}
+    <script>
+
+         const solutionObj = JSON.parse(document.querySelector('#user-solutions').innerHTML);
+         const main = document.querySelector('.flex-column');
+        console.log(solutionObj);
+        for(const ele of solutionObj) {
+            const div = document.createElement('div');
+            div.classList.add('d-flex', 'flex-row', 'justify-content-center');
+            const link = document.createElement('a');
+            link.role = 'button';
+            link.classList.add('btn', 'btn-outline-dark','btn-info', 'btn-lg', 'col-sm-4');
+            link.href = `/solution/${encodeURIComponent(ele._id)}`;
+            link.innerHTML = `${ele.title}`;
+            const linkEdit = document.createElement('a');
+            linkEdit.classList.add('btn','btn-warning', 'btn-lg', 'col-sm-1', 'disabled');
+            linkEdit.innerHTML = `lang: ${ele.language}`;
+            linkEdit.tabIndex = '-1';
+            linkEdit.role = 'button';
+            linkEdit['aria-disabled'] = 'true';
+            const linkDelete = document.createElement('a');
+            linkDelete.role = 'button';
+            linkDelete.classList.add('btn', 'btn-outline-dark','btn-danger', 'btn-lg', 'col-sm-1');
+            linkDelete.href = '#';
+            linkDelete.innerHTML = `Delete`;
+
+            linkDelete.addEventListener('click', async (e) => {
+                e.preventDefault();
+                Swal.fire({           
+            title: 'Do you want to delete the solution?',
+            showCancelButton: true,
+            confirmButtonText: `Save`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                const response = fetch(`/user/solution/${encodeURIComponent(ele._id)}`, {method:'DELETE', headers:{
+                    'Content-Type': 'application/json',
+                }}).then((result)=> {if(result.status === 200){Swal.fire('Deleted!', '', 'success').then((result) => location.reload())}}).catch((error)=>console.log(error));
+              
+            }
+        });
+    });
+            div.append(link, linkEdit,linkDelete);
+            main.appendChild(div);
+        }
+    </script>
+  </body>
+</html>

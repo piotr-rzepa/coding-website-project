@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sign up</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--Bootstrap CSS-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+
+    <!-- Font Awesome-->
+    <script src="https://kit.fontawesome.com/4b5aa82aa9.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  </head>
+
+  <body
+    class="d-flex"
+    style="
+      height: 100vh;
+      background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(159, 159, 255, 1) 50%, rgba(0, 212, 255, 1) 100%);
+    "
+  >
+    <div
+      class="card justify-content-center align-self-center container-fluid text-center col-sm-3 my-auto align-middle"
+      style="background: linear-gradient(90deg, rgba(148, 164, 255, 1) 0%, rgba(160, 148, 228, 1) 100%)"
+    >
+      <form class="card-body" id="form-sign-up" method="POST">
+        <img class="mb-4 rounded" src="/images/python-code-unsplash.jpg" alt="" width="96" height="96" />
+        <h1 class="card-title h3 mb-3 font-weight-normal">Please fill in the blanks</h1>
+
+        <label for="nickname" class="sr-only">Nickname</label>
+        <input
+          type="text"
+          name="nickname"
+          class="form-control my-2"
+          id="inputNickname"
+          placeholder="Nickname"
+          aria-describedby="nicknameHelpBlock"
+          required
+          autofocus
+        />
+        <small class="form-text text-muted" id="nicknameHelpBlock"
+          >Your nickname must be 3-10 long, can have up to 2 numbers and 8 characters with the minimum of 3. Should not
+          contain emojis or special characters.</small
+        >
+
+        <label for="name" class="sr-only">Name</label>
+        <input type="text" name="name" class="form-control my-2" id="inputName" placeholder="Name" />
+
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input
+          type="email"
+          name="email"
+          id="inputEmail"
+          class="form-control my-2"
+          placeholder="Email address"
+          required
+        />
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="inputPassword"
+          class="form-control my-2"
+          placeholder="Password"
+          aria-describedby="passwordHelpBlock"
+          required
+        />
+        <small class="form-text text-muted" id="passwordHelpBlock"
+          >Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces or
+          special characters.</small
+        >
+
+        <button class="btn btn-lg btn-primary btn-block my-2" type="submit">Create an account</button>
+        <p class="text-danger font-weight-bold" id="error-submit" style="visibility: hidden"></p>
+        <p class="mt-4 mb-3 text-muted">© 2020-2021</p>
+      </form>
+    </div>
+
+    {{>scripts}}
+    <script src="javascripts/form-handler-up.js" type="module"></script>
+  </body>
+</html>

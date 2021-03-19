@@ -1,0 +1,210 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles" />
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<!--TODO: sweetalerty definicja -->
+<script async>
+  const alertSuccess = function (message = '', position = '', resolve) {
+    Swal.fire({
+      icon: 'success',
+      position,
+      title: message,
+      showConfirmButton: false,
+      timer: 1500,
+    })
+      .then((e) => resolve())
+      .catch((e) => console.log(e));
+  };
+
+  const changeName = (message = '') => {
+    Swal.fire({
+      title: 'Submit new user name',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off',
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      showLoaderOnConfirm: true,
+      preConfirm: async (name) => {
+        try {
+          const response = await fetch('/user/update', {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name }),
+          });
+        } catch (error) {
+          console.log(error);
+          Swal.showValidationMessage(`Request failed: ${error}`);
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+  const changeEmail = (message = '') => {
+    Swal.fire({
+      title: 'Submit new email',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off',
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      showLoaderOnConfirm: true,
+      preConfirm: async (email) => {
+        try {
+          const response = await fetch('/user/update', {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+          });
+          if (response.status === 422) {
+            const result = await response.json();
+            throw new Error(result.error);
+          }
+        } catch (error) {
+          Swal.showValidationMessage(`Request failed: ${error}`);
+        }
+      },
+      allowOutsideClick: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let timerInterval;
+        Swal.fire({
+          title: message,
+          html: 'You will be logged out in <b></b> milliseconds.',
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent();
+              if (content) {
+                const b = content.querySelector('b');
+                if (b) {
+                  b.textContent = Swal.getTimerLeft();
+                }
+              }
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            fetch('/logout', {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error(response.statusText);
+                }
+                location.href = response.url;
+              })
+              .catch((error) => {
+                Swal.showValidationMessage(`Request failed: ${error}`);
+              });
+          }
+        });
+      }
+    });
+  };
+
+  const changePassword = async (message = '', validator) => {
+    try {
+      const response = await Swal.mixin({
+        input: 'text',
+        confirmButtonText: 'Next &rarr;',
+        showCancelButton: true,
+        progressSteps: ['1', '2', '3'],
+      }).queue([
+        {
+          title: 'Step 1',
+          text: 'Submit old password',
+        },
+        {
+          title: 'Step 2',
+          text: 'Submit new password',
+        },
+        {
+          title: 'Step 3',
+          text: 'Confirm new password',
+        },
+      ]);
+      if (response.value) {
+        const updData = JSON.stringify(response.value);
+        const reqData = JSON.parse(updData);
+        /* Sprawdzamy, czy hasło i potwierdzenie się zgadzają
+          i czy nie jest za słabe */
+        validator(reqData.slice(1));
+        const updateRequest = await fetch('/user/update/password', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ oldpassword: reqData[0], newpassword: reqData[1] }),
+        });
+        if (updateRequest.status !== 200) {
+          const result = await updateRequest.json();
+          console.log('error !response.status === 200');
+          throw new Error(result.error);
+        }
+        let timerInterval;
+        const successUpdate = await Swal.fire({
+          title: message,
+          html: 'You will be logged out in <b></b> milliseconds.',
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent();
+              if (content) {
+                const b = content.querySelector('b');
+                if (b) {
+                  b.textContent = Swal.getTimerLeft();
+                }
+              }
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        });
+        if (successUpdate.dismiss === Swal.DismissReason.timer) {
+          const logout = await fetch('/logout', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          if (logout.status !== 500) {
+            location.href = logout.url;
+          } else {
+            const result = await logout.json();
+            throw new Error(logout.error);
+          }
+        }
+      }
+    } catch (e) {
+      await Swal.fire(`Request failed: ${e}`);
+    }
+  };
+</script>
