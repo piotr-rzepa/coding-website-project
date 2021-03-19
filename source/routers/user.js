@@ -15,13 +15,13 @@ const { dbValidation } = require('../database/database-validation');
 router.get('/home/page:page', async (req, res) => {
   //Sprawdzamy czy użytkownik ma na tym urządzeniu zalogowaną sesje
   if (req.cookies.JWT === null) {
-    res.render('index');
+    res.render('index', { skip: req.params.page, lang: req.query.lang });
   } else {
     try {
       //Weryfikujemy ciasteczko
       jwt.verify(req.cookies.JWT, toString(process.env.TOKEN_KEY), async function (err, decoded) {
         //Jeżeli ciasteczko się nie zgadza bądź nie ma sesji, renderujemy main page bez panelu użytkownika
-        if (err) res.render('index');
+        if (err) res.render('index', { skip: req.params.page, lang: req.query.lang });
         else {
           //Renderujemy panel użytkownika za pomocą danych z ciasteczka
           const user = await User.findOne({ _id: decoded._id, 'tokens.token': req.cookies.JWT });
