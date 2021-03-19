@@ -1,6 +1,6 @@
 'use strict';
-const app = require('./index');
-const { INFO } = require('./chalk');
+const app = require('./index.js');
+const { INFO } = require('./chalk.js');
 
 //Nasłuchiwanie połączeń z serwerem
 app.listen(process.env.PORT, () => {

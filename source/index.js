@@ -1,12 +1,12 @@
 'use strict';
 
 const express = require('express');
-require('./database/mongoose'); //Automatycznie połączenie z bazą
+require('./database/mongoose.js'); //Automatycznie połączenie z bazą
 const hbs = require('hbs');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const routerUser = require('./routers/user');
-const routerSolution = require('./routers/solution');
+const routerUser = require('./routers/user.js');
+const routerSolution = require('./routers/solution.js');
 //Tworzenie aplikacji Express'a
 const app = express();
 
