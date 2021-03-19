@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const router = new express.Router();
-const { ERROR } = require('../chalk');
+//const { ERROR } = require('../chalk');
 const User = require('../models/User'); //Schemat użytkownika
 const Solution = require('../models/Solution');
 const { authentication } = require('../database/authentication');
@@ -24,7 +24,7 @@ router.get('/solution/:id', async (req, res) => {
       title: solution.title,
     });
   } catch (e) {
-    console.log(ERROR('/solutions', e));
+    //console.log(ERROR('/solutions', e));
   }
 });
 
@@ -65,7 +65,7 @@ router.get('/solutions/all', async (req, res) => {
     }
     res.status(200).send(solutions);
   } catch (e) {
-    console.log(ERROR('/solutions/all', e));
+    //console.log(ERROR('/solutions/all', e));
     res.status(400).send({ error: e });
   }
 });
@@ -76,7 +76,7 @@ router.get('/user/solution/all', authentication, async (req, res) => {
     const userSolutions = await Solution.find({ createdBy: req.user._id });
     res.render('user-solutions', { userSolutions: JSON.stringify(userSolutions) });
   } catch (e) {
-    console.log(ERROR('/user/solution/all', e));
+    //console.log(ERROR('/user/solution/all', e));
     res.status(400).send({ error: e });
   }
 });
@@ -101,7 +101,7 @@ router.post('/user/solution/add', authentication, async (req, res) => {
     await solution.save();
     res.status(200).send();
   } catch (e) {
-    console.log(ERROR('/user/solution/add', e));
+    //console.log(ERROR('/user/solution/add', e));
     res.status(400).send();
   }
 });
@@ -120,7 +120,7 @@ router.delete('/user/solution/:id', authentication, async (req, res) => {
     if (!solution) return res.status(404).send();
     else res.status(200).send();
   } catch (e) {
-    console.log(ERROR('DELETE /user/solution/:id', e));
+    //console.log(ERROR('DELETE /user/solution/:id', e));
     res.status(500).send(e);
   }
 });

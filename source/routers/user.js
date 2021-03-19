@@ -1,21 +1,16 @@
 'use strict';
 const express = require('express');
 const router = new express.Router();
-const { ERROR } = require('../chalk');
+//const { ERROR } = require('../chalk');
 const User = require('../models/User'); //Schemat użytkownika
 const { authentication } = require('../database/authentication');
 const jwt = require('jsonwebtoken');
 const Solution = require('../models/Solution');
 const { dbValidation } = require('../database/database-validation');
-const { red } = require('chalk');
 
 /**
  * *================================= GET REQUESTS =================================
  */
-
-router.get('/', async (req, res) => {
-  red.render('index');
-});
 
 router.get('/home/page:page', async (req, res) => {
   //Sprawdzamy czy użytkownik ma na tym urządzeniu zalogowaną sesje
@@ -71,7 +66,7 @@ router.get('/logout', authentication, async (req, res) => {
     await req.user.save();
     res.redirect('/home/page1');
   } catch (e) {
-    console.log(ERROR('/logout', e));
+    //console.log(ERROR('/logout', e));
     res.status(500).send({ error: e });
   }
 });
@@ -91,7 +86,7 @@ router.post('/create', async (req, res) => {
     await res.redirect('/home/page1');
   } catch (e) {
     if (e === 'MongoError') e.message = 'Email or nickname already exist!';
-    console.log(ERROR('/create', e));
+    //console.log(ERROR('/create', e));
     res.status(400).send({ error: e.message });
   }
 });
@@ -107,7 +102,7 @@ router.post('/login', async (req, res) => {
     });
     res.redirect(`/home/page1`);
   } catch (e) {
-    console.log(ERROR(e));
+    //console.log(ERROR(e));
     res.status(422).send({ error: e.message });
   }
 });
@@ -132,7 +127,7 @@ router.patch('/user/update', authentication, dbValidation, async (req, res) => {
     await req.user.save();
     res.status(200).send(req.user);
   } catch (e) {
-    console.log(ERROR('/user/update', e));
+    //console.log(ERROR('/user/update', e));
     res.status(422).send({ error: e.message });
   }
 });
@@ -147,7 +142,7 @@ router.patch('/user/update/password', authentication, dbValidation, async (req, 
     res.status(200).send();
     //else throw new Error('old password is wrong!');
   } catch (e) {
-    console.log(ERROR('/user/update/password', e));
+    //console.log(ERROR('/user/update/password', e));
     res.status(422).send({ error: e.message });
   }
 });
@@ -173,7 +168,7 @@ router.delete('/user/me', authentication, async (req, res) => {
     await req.user.remove();
     res.redirect('/home/page1');
   } catch (e) {
-    console.log(ERROR('DELETE /user/me', e));
+    //console.log(ERROR('DELETE /user/me', e));
     res.status(500).send({ error: e.message });
   }
 });

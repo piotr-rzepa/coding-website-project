@@ -1,6 +1,5 @@
 'use strict';
 
-const { ERROR, SUCCESS } = require('../chalk');
 //Importujemy mongoose - narzędzie do modelowania danych
 const mongoose = require('mongoose');
 
