@@ -7,10 +7,16 @@ const { authentication } = require('../database/authentication');
 const jwt = require('jsonwebtoken');
 const Solution = require('../models/Solution');
 const { dbValidation } = require('../database/database-validation');
+const { red } = require('chalk');
 
 /**
  * *================================= GET REQUESTS =================================
  */
+
+router.get('/', async (req, res) => {
+  red.render('index');
+});
+
 router.get('/home/page:page', async (req, res) => {
   //Sprawdzamy czy użytkownik ma na tym urządzeniu zalogowaną sesje
   if (req.cookies.JWT === null) {
