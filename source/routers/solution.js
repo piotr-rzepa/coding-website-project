@@ -72,7 +72,10 @@ router.get('/solutions/all', async (req, res) => {
     for (let i = 0; i < solutions.length; ++i) {
       const owner = await User.findById(solutions[i].createdBy);
       solutions[i].author = owner.nickname;
-      solutions[i].createdAt = dateFormat(new Date(solutions[i].createdAt), 'dddd, mmmm dS, yyyy, h:MM:ss TT');
+      solutions[i].createdAt = dateFormat(
+        new Date(solutions[i].createdAt),
+        'dddd, mmmm dS, yyyy, h:MM:ss TT',
+      );
     }
     res.status(200).send(solutions);
   } catch (e) {
@@ -127,7 +130,10 @@ router.post('/user/solution/add', authentication, async (req, res) => {
 
 router.delete('/user/solution/:id', authentication, async (req, res) => {
   try {
-    const solution = await Solution.findOneAndDelete({ _id: req.params.id, createdBy: req.user._id });
+    const solution = await Solution.findOneAndDelete({
+      _id: req.params.id,
+      createdBy: req.user._id,
+    });
     if (!solution) return res.status(404).send();
     else res.status(200).send();
   } catch (e) {

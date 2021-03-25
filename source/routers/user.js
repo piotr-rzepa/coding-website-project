@@ -25,7 +25,13 @@ router.get('/home/page:page', async (req, res) => {
         else {
           //Renderujemy panel użytkownika za pomocą danych z ciasteczka
           const user = await User.findOne({ _id: decoded._id, 'tokens.token': req.cookies.JWT });
-          if (user) res.render('index', { signIn: true, user: user, skip: req.params.page, lang: req.query.lang });
+          if (user)
+            res.render('index', {
+              signIn: true,
+              user: user,
+              skip: req.params.page,
+              lang: req.query.lang,
+            });
           else res.render('index');
         }
       });
@@ -49,8 +55,12 @@ router.get('/users/profile/me', authentication, async (req, res) => {
   const uploaded = await Solution.find({ createdBy: req.user._id });
   if (uploaded.length !== 0) {
     //Jeżeli jakieś istnieją, to pobieramy również to najnowsze
-    const mostRecent = await Solution.find({ createdBy: req.user._id }).sort({ createdAt: -1 }).limit(1);
-    return res.status(200).render('profile', { user: req.user, uploaded: uploaded.length, recent: mostRecent[0]._id });
+    const mostRecent = await Solution.find({ createdBy: req.user._id })
+      .sort({ createdAt: -1 })
+      .limit(1);
+    return res
+      .status(200)
+      .render('profile', { user: req.user, uploaded: uploaded.length, recent: mostRecent[0]._id });
   } else res.status(200).render('profile', { user: req.user, uploaded: uploaded.length });
 });
 

@@ -9,7 +9,7 @@ const solutionSchema = mongoose.Schema(
     createdBy: { type: mongoose.Schema.Types.ObjectId },
     tags: [],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 //Pozbywamy się niepotrzebnych własności obiektu

@@ -8,7 +8,14 @@ const app = require('../source/index');
 const User = require('../source/models/User');
 const Solution = require('../source/models/Solution');
 
-const { userOne, userTwo, solutionOne, solutionTwo, solutionThree, populateDB } = require('./fixtures/db');
+const {
+  userOne,
+  userTwo,
+  solutionOne,
+  solutionTwo,
+  solutionThree,
+  populateDB,
+} = require('./fixtures/db');
 
 beforeEach(populateDB);
 
@@ -17,7 +24,13 @@ test('Should add new solution', async () => {
     .post('/user/solution/add')
     .set('Cookie', [`JWT=${userOne.tokens[0].token}`])
     .send({
-      body: [{ line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }],
+      body: [
+        { line1: 'Hello' },
+        { line1: 'Hello' },
+        { line1: 'Hello' },
+        { line1: 'Hello' },
+        { line1: 'Hello' },
+      ],
     })
     .expect(200);
 });
@@ -64,7 +77,11 @@ test('Should not delete solution -> bad/empty id', async () => {
 });
 
 test('Should not delete solution -> not authenticated', async () => {
-  await request(app).delete(`/user/solution/${solutionThree._id}`).set('Cookie', [`JWT=jkjlkjlkji`]).send().expect(401);
+  await request(app)
+    .delete(`/user/solution/${solutionThree._id}`)
+    .set('Cookie', [`JWT=jkjlkjlkji`])
+    .send()
+    .expect(401);
 
   const solution = await Solution.findOne({ _id: solutionThree._id });
   expect(solution).not.toBeNull();

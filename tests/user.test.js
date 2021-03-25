@@ -28,7 +28,11 @@ test('Create new user', async () => {
   await expect(response.redirect).toBe(true);
 
   //Upewnienie że w bazie danych pojawił się taki uzytkownik
-  const user = await User.findOne({ email: 'maciek_kowalski@o10.pl', nickname: 'jajuwa12', name: 'Adam' });
+  const user = await User.findOne({
+    email: 'maciek_kowalski@o10.pl',
+    nickname: 'jajuwa12',
+    name: 'Adam',
+  });
   expect(user).not.toBeNull();
   //Sprawdzanie czy hasło zostało zahashowane
   expect(user.password).not.toBe('Gr*szka112');
@@ -47,7 +51,10 @@ test('Should login existing user', async () => {
 });
 
 test('Should get user profile', async () => {
-  const response = await request(app).get('/users/profile/me').set('Cookie', `JWT=${userOne.tokens[0].token}`).send();
+  const response = await request(app)
+    .get('/users/profile/me')
+    .set('Cookie', `JWT=${userOne.tokens[0].token}`)
+    .send();
   expect(response.status).toBe(200);
 });
 

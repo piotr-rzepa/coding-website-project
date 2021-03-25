@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema(
     },
     tokens: [{ token: { type: String, required: true } }],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 //Haszowanie hasła za pomocą hooka tuż przed jego zapisaniem do bazy danych

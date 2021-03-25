@@ -23,7 +23,13 @@ const solutionOne = {
   _id: new mongoose.Types.ObjectId(),
   title: 'test solution1 title',
   language: 'cpp',
-  body: [{ line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }],
+  body: [
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+  ],
   createdBy: userOneID,
 };
 
@@ -31,7 +37,13 @@ const solutionTwo = {
   _id: new mongoose.Types.ObjectId(),
   title: 'test solution2 title',
   language: 'csharp',
-  body: [{ line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }],
+  body: [
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+  ],
   createdBy: userOneID,
 };
 
@@ -39,7 +51,13 @@ const solutionThree = {
   _id: new mongoose.Types.ObjectId(),
   title: 'test solution3 title',
   language: 'python',
-  body: [{ line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }, { line1: 'Hello' }],
+  body: [
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+    { line1: 'Hello' },
+  ],
   createdBy: userTwoID,
 };
 

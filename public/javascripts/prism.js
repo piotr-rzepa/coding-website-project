@@ -166,7 +166,9 @@ var _self =
               (s.onmessage = function (e) {
                 o(e.data);
               }),
-                s.postMessage(JSON.stringify({ language: l.language, code: l.code, immediateClose: !0 }));
+                s.postMessage(
+                  JSON.stringify({ language: l.language, code: l.code, immediateClose: !0 }),
+                );
             } else o(M.highlight(l.code, l.grammar, l.language));
           else o(M.util.encode(l.code));
         },
@@ -221,7 +223,11 @@ var _self =
                             P = y;
                           for (P += m.value.length; P <= w; ) (m = m.next), (P += m.value.length);
                           if (((P -= m.value.length), (y = P), m.value instanceof W)) continue;
-                          for (var S = m; S !== t.tail && (P < A || 'string' == typeof S.value); S = S.next)
+                          for (
+                            var S = m;
+                            S !== t.tail && (P < A || 'string' == typeof S.value);
+                            S = S.next
+                          )
                             x++, (P += S.value.length);
                           x--, (k = n.slice(y, P)), (b.index -= y);
                         } else if (!(b = z(p, 0, k, f))) continue;
@@ -312,10 +318,24 @@ var _self =
             language: t,
           },
           i = e.alias;
-        i && (Array.isArray(i) ? Array.prototype.push.apply(a.classes, i) : a.classes.push(i)), M.hooks.run('wrap', a);
+        i && (Array.isArray(i) ? Array.prototype.push.apply(a.classes, i) : a.classes.push(i)),
+          M.hooks.run('wrap', a);
         var l = '';
-        for (var o in a.attributes) l += ' ' + o + '="' + (a.attributes[o] || '').replace(/"/g, '&quot;') + '"';
-        return '<' + a.tag + ' class="' + a.classes.join(' ') + '"' + l + '>' + a.content + '</' + a.tag + '>';
+        for (var o in a.attributes)
+          l += ' ' + o + '="' + (a.attributes[o] || '').replace(/"/g, '&quot;') + '"';
+        return (
+          '<' +
+          a.tag +
+          ' class="' +
+          a.classes.join(' ') +
+          '"' +
+          l +
+          '>' +
+          a.content +
+          '</' +
+          a.tag +
+          '>'
+        );
       }),
       !u.document)
     )
@@ -331,7 +351,7 @@ var _self =
                   a = n.immediateClose;
                 u.postMessage(M.highlight(r, M.languages[t], t)), a && u.close();
               },
-              !1
+              !1,
             )),
         M
       );
@@ -339,7 +359,9 @@ var _self =
     function r() {
       M.manual || M.highlightAll();
     }
-    if ((t && ((M.filename = t.src), t.hasAttribute('data-manual') && (M.manual = !0)), !M.manual)) {
+    if (
+      (t && ((M.filename = t.src), t.hasAttribute('data-manual') && (M.manual = !0)), !M.manual)
+    ) {
       var a = document.readyState;
       'loading' === a || ('interactive' === a && t && t.defer)
         ? document.addEventListener('DOMContentLoaded', r)
@@ -358,7 +380,12 @@ var _self =
     pattern: /<!DOCTYPE(?:[^>"'[\]]|"[^"]*"|'[^']*')+(?:\[(?:[^<"'\]]|"[^"]*"|'[^']*'|<(?!!--)|<!--(?:[^-]|-(?!->))*-->)*\]\s*)?>/i,
     greedy: !0,
     inside: {
-      'internal-subset': { pattern: /(\[)[\s\S]+(?=\]>$)/, lookbehind: !0, greedy: !0, inside: null },
+      'internal-subset': {
+        pattern: /(\[)[\s\S]+(?=\]>$)/,
+        lookbehind: !0,
+        greedy: !0,
+        inside: null,
+      },
       string: { pattern: /"[^"]*"|'[^']*'/, greedy: !0 },
       punctuation: /^<!|>$|[[\]]/,
       'doctype-tag': /^DOCTYPE/,
@@ -370,7 +397,10 @@ var _self =
     pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/,
     greedy: !0,
     inside: {
-      tag: { pattern: /^<\/?[^\s>\/]+/, inside: { punctuation: /^<\/?/, namespace: /^[^\s>\/:]+:/ } },
+      tag: {
+        pattern: /^<\/?[^\s>\/]+/,
+        inside: { punctuation: /^<\/?/, namespace: /^[^\s>\/:]+:/ },
+      },
       'special-attr': [],
       'attr-value': {
         pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/,
@@ -405,9 +435,9 @@ var _self =
             /__/g,
             function () {
               return a;
-            }
+            },
           ),
-          'i'
+          'i',
         ),
         lookbehind: !0,
         greedy: !0,
@@ -419,7 +449,10 @@ var _self =
   Object.defineProperty(Prism.languages.markup.tag, 'addAttribute', {
     value: function (a, e) {
       Prism.languages.markup.tag.inside['special-attr'].push({
-        pattern: RegExp('(^|["\'\\s])(?:' + a + ')\\s*=\\s*(?:"[^"]*"|\'[^\']*\'|[^\\s\'">=]+(?=[\\s>]))', 'i'),
+        pattern: RegExp(
+          '(^|["\'\\s])(?:' + a + ')\\s*=\\s*(?:"[^"]*"|\'[^\']*\'|[^\\s\'">=]+(?=[\\s>]))',
+          'i',
+        ),
         lookbehind: !0,
         inside: {
           'attr-name': /^[^\s=]+/,
@@ -587,11 +620,14 @@ Prism.languages.clike = {
     (Prism.languages.markup.tag.addInlined('script', 'javascript'),
     Prism.languages.markup.tag.addAttribute(
       'on(?:abort|blur|change|click|composition(?:end|start|update)|dblclick|error|focus(?:in|out)?|key(?:down|up)|load|mouse(?:down|enter|leave|move|out|over|up)|reset|resize|scroll|select|slotchange|submit|unload|wheel)',
-      'javascript'
+      'javascript',
     )),
   (Prism.languages.js = Prism.languages.javascript);
 (Prism.languages.c = Prism.languages.extend('clike', {
-  comment: { pattern: /\/\/(?:[^\r\n\\]|\\(?:\r\n?|\n|(?![\r\n])))*|\/\*[\s\S]*?(?:\*\/|$)/, greedy: !0 },
+  comment: {
+    pattern: /\/\/(?:[^\r\n\\]|\\(?:\r\n?|\n|(?![\r\n])))*|\/\*[\s\S]*?(?:\*\/|$)/,
+    greedy: !0,
+  },
   'class-name': {
     pattern: /(\b(?:enum|struct)\s+(?:__attribute__\s*\(\([\s\S]*?\)\)\s*)?)\w+|\b[a-z]\w*_t\b/,
     lookbehind: !0,
@@ -639,7 +675,8 @@ Prism.languages.clike = {
       });
     return e.replace(/<<self>>/g, '[^\\s\\S]');
   }
-  var n = 'bool byte char decimal double dynamic float int long object sbyte short string uint ulong ushort var void',
+  var n =
+      'bool byte char decimal double dynamic float int long object sbyte short string uint ulong ushort var void',
     i = 'class enum interface struct',
     r =
       'add alias and ascending async await by descending from get global group into join let nameof not notnull on or orderby partial remove select set unmanaged value when where',
@@ -669,19 +706,34 @@ Prism.languages.clike = {
     $ = '"(?:\\\\.|[^\\\\"\r\n])*"';
   (s.languages.csharp = s.languages.extend('clike', {
     string: [
-      { pattern: t('(^|[^$\\\\])<<0>>', ['@"(?:""|\\\\[^]|[^\\\\"])*"(?!")']), lookbehind: !0, greedy: !0 },
+      {
+        pattern: t('(^|[^$\\\\])<<0>>', ['@"(?:""|\\\\[^]|[^\\\\"])*"(?!")']),
+        lookbehind: !0,
+        greedy: !0,
+      },
       { pattern: t('(^|[^@$\\\\])<<0>>', [$]), lookbehind: !0, greedy: !0 },
       { pattern: RegExp(x), greedy: !0, alias: 'character' },
     ],
     'class-name': [
       { pattern: t('(\\busing\\s+static\\s+)<<0>>(?=\\s*;)', [m]), lookbehind: !0, inside: v },
-      { pattern: t('(\\busing\\s+<<0>>\\s*=\\s*)<<1>>(?=\\s*;)', [h, w]), lookbehind: !0, inside: v },
+      {
+        pattern: t('(\\busing\\s+<<0>>\\s*=\\s*)<<1>>(?=\\s*;)', [h, w]),
+        lookbehind: !0,
+        inside: v,
+      },
       { pattern: t('(\\busing\\s+)<<0>>(?=\\s*=)', [h]), lookbehind: !0 },
       { pattern: t('(\\b<<0>>\\s+)<<1>>', [d, f]), lookbehind: !0, inside: v },
       { pattern: t('(\\bcatch\\s*\\(\\s*)<<0>>', [m]), lookbehind: !0, inside: v },
       { pattern: t('(\\bwhere\\s+)<<0>>', [h]), lookbehind: !0 },
       { pattern: t('(\\b(?:is(?:\\s+not)?|as)\\s+)<<0>>', [y]), lookbehind: !0, inside: v },
-      { pattern: t('\\b<<0>>(?=\\s+(?!<<1>>)<<2>>(?:\\s*[=,;:{)\\]]|\\s+(?:in|when)\\b))', [w, u, h]), inside: v },
+      {
+        pattern: t('\\b<<0>>(?=\\s+(?!<<1>>)<<2>>(?:\\s*[=,;:{)\\]]|\\s+(?:in|when)\\b))', [
+          w,
+          u,
+          h,
+        ]),
+        inside: v,
+      },
     ],
     keyword: p,
     number: /(?:\b0(?:x[\da-f_]*[\da-f]|b[01_]*[01])|(?:\B\.\d+(?:_+\d+)*|\b\d+(?:_+\d+)*(?:\.\d+(?:_+\d+)*)?)(?:e[-+]?\d+(?:_+\d+)*)?)(?:ul|lu|[dflmu])?\b/i,
@@ -690,7 +742,11 @@ Prism.languages.clike = {
   })),
     s.languages.insertBefore('csharp', 'number', { range: { pattern: /\.\./, alias: 'operator' } }),
     s.languages.insertBefore('csharp', 'punctuation', {
-      'named-parameter': { pattern: t('([(,]\\s*)<<0>>(?=\\s*:)', [h]), lookbehind: !0, alias: 'punctuation' },
+      'named-parameter': {
+        pattern: t('([(,]\\s*)<<0>>(?=\\s*:)', [h]),
+        lookbehind: !0,
+        alias: 'punctuation',
+      },
     }),
     s.languages.insertBefore('csharp', 'class-name', {
       namespace: {
@@ -699,7 +755,10 @@ Prism.languages.clike = {
         inside: { punctuation: /\./ },
       },
       'type-expression': {
-        pattern: t('(\\b(?:default|typeof|sizeof)\\s*\\(\\s*(?!\\s))(?:[^()\\s]|\\s(?!\\s)|<<0>>)*(?=\\s*\\))', [b]),
+        pattern: t(
+          '(\\b(?:default|typeof|sizeof)\\s*\\(\\s*(?!\\s))(?:[^()\\s]|\\s(?!\\s)|<<0>>)*(?=\\s*\\))',
+          [b],
+        ),
         lookbehind: !0,
         alias: 'class-name',
         inside: v,
@@ -717,15 +776,22 @@ Prism.languages.clike = {
       },
       'generic-method': {
         pattern: t('<<0>>\\s*<<1>>(?=\\s*\\()', [h, g]),
-        inside: { function: t('^<<0>>', [h]), generic: { pattern: RegExp(g), alias: 'class-name', inside: v } },
+        inside: {
+          function: t('^<<0>>', [h]),
+          generic: { pattern: RegExp(g), alias: 'class-name', inside: v },
+        },
       },
       'type-list': {
         pattern: t(
           '\\b((?:<<0>>\\s+<<1>>|where\\s+<<2>>)\\s*:\\s*)(?:<<3>>|<<4>>)(?:\\s*,\\s*(?:<<3>>|<<4>>))*(?=\\s*(?:where|[{;]|=>|$))',
-          [d, f, h, w, p.source]
+          [d, f, h, w, p.source],
         ),
         lookbehind: !0,
-        inside: { keyword: p, 'class-name': { pattern: RegExp(w), greedy: !0, inside: v }, punctuation: /,/ },
+        inside: {
+          keyword: p,
+          'class-name': { pattern: RegExp(w), greedy: !0, inside: v },
+          punctuation: /,/,
+        },
       },
       preprocessor: {
         pattern: /(^\s*)#.*/m,
@@ -747,7 +813,10 @@ Prism.languages.clike = {
     P = a('<<0>>(?:\\s*\\(<<1>>*\\))?', [m, E]);
   s.languages.insertBefore('csharp', 'class-name', {
     attribute: {
-      pattern: t('((?:^|[^\\s\\w>)?])\\s*\\[\\s*)(?:<<0>>\\s*:\\s*)?<<1>>(?:\\s*,\\s*<<1>>)*(?=\\s*\\])', [R, P]),
+      pattern: t(
+        '((?:^|[^\\s\\w>)?])\\s*\\[\\s*)(?:<<0>>\\s*:\\s*)?<<1>>(?:\\s*,\\s*<<1>>)*(?=\\s*\\])',
+        [R, P],
+      ),
       lookbehind: !0,
       greedy: !0,
       inside: {
@@ -808,9 +877,12 @@ Prism.languages.clike = {
     'class-name': [
       {
         pattern: RegExp(
-          '(\\b(?:class|concept|enum|struct|typename)\\s+)(?!<keyword>)\\w+'.replace(/<keyword>/g, function () {
-            return t.source;
-          })
+          '(\\b(?:class|concept|enum|struct|typename)\\s+)(?!<keyword>)\\w+'.replace(
+            /<keyword>/g,
+            function () {
+              return t.source;
+            },
+          ),
         ),
         lookbehind: !0,
       },
@@ -830,10 +902,13 @@ Prism.languages.clike = {
       module: {
         pattern: RegExp(
           '(\\b(?:module|import)\\s+)(?:"(?:\\\\(?:\r\n|[^])|[^"\\\\\r\n])*"|<[^<>\r\n]*>|' +
-            '<mod-name>(?:\\s*:\\s*<mod-name>)?|:\\s*<mod-name>'.replace(/<mod-name>/g, function () {
-              return n;
-            }) +
-            ')'
+            '<mod-name>(?:\\s*:\\s*<mod-name>)?|:\\s*<mod-name>'.replace(
+              /<mod-name>/g,
+              function () {
+                return n;
+              },
+            ) +
+            ')',
         ),
         lookbehind: !0,
         greedy: !0,
@@ -853,7 +928,7 @@ Prism.languages.clike = {
       'inside',
       'operator',
       { 'class-name': /\b[a-z_]\w*\b(?!\s*::)/i },
-      e.languages.cpp['base-clause']
+      e.languages.cpp['base-clause'],
     );
 })(Prism);
 !(function (e) {
@@ -878,7 +953,10 @@ Prism.languages.clike = {
             inside: { punctuation: /\|$/ },
           },
           'attr-name': { pattern: /^(\s*)(?:(?!\s)[-\w\xA0-\uFFFF])+/, lookbehind: !0 },
-          'attr-value': [n, { pattern: /(=\s*)(?:(?!\s)[-\w\xA0-\uFFFF])+(?=\s*$)/, lookbehind: !0 }],
+          'attr-value': [
+            n,
+            { pattern: /(=\s*)(?:(?!\s)[-\w\xA0-\uFFFF])+(?=\s*$)/, lookbehind: !0 },
+          ],
           operator: /[|~*^$]?=/,
         },
       },
@@ -949,16 +1027,29 @@ Prism.languages.clike = {
       pattern: RegExp(n + '[A-Z](?:[\\d_A-Z]*[a-z]\\w*)?\\b'),
       lookbehind: !0,
       inside: {
-        namespace: { pattern: /^[a-z]\w*(?:\s*\.\s*[a-z]\w*)*(?:\s*\.)?/, inside: { punctuation: /\./ } },
+        namespace: {
+          pattern: /^[a-z]\w*(?:\s*\.\s*[a-z]\w*)*(?:\s*\.)?/,
+          inside: { punctuation: /\./ },
+        },
         punctuation: /\./,
       },
     };
   (e.languages.java = e.languages.extend('clike', {
-    'class-name': [a, { pattern: RegExp(n + '[A-Z]\\w*(?=\\s+\\w+\\s*[;,=())])'), lookbehind: !0, inside: a.inside }],
+    'class-name': [
+      a,
+      {
+        pattern: RegExp(n + '[A-Z]\\w*(?=\\s+\\w+\\s*[;,=())])'),
+        lookbehind: !0,
+        inside: a.inside,
+      },
+    ],
     keyword: t,
     function: [e.languages.clike.function, { pattern: /(\:\:\s*)[a-z_]\w*/, lookbehind: !0 }],
     number: /\b0b[01][01_]*L?\b|\b0x(?:\.[\da-f_p+-]+|[\da-f_]+(?:\.[\da-f_p+-]+)?)\b|(?:\b\d[\d_]*(?:\.[\d_]*)?|\B\.\d[\d_]*)(?:e[+-]?\d[\d_]*)?[dfl]?/i,
-    operator: { pattern: /(^|[^.])(?:<<=?|>>>?=?|->|--|\+\+|&&|\|\||::|[?:~]|[-+*/%&|^!=<>]=?)/m, lookbehind: !0 },
+    operator: {
+      pattern: /(^|[^.])(?:<<=?|>>>?=?|->|--|\+\+|&&|\|\||::|[?:~]|[-+*/%&|^!=<>]=?)/m,
+      lookbehind: !0,
+    },
   })),
     e.languages.insertBefore('java', 'string', {
       'triple-quoted-string': {
@@ -979,8 +1070,8 @@ Prism.languages.clike = {
             /<keyword>/g,
             function () {
               return t.source;
-            }
-          )
+            },
+          ),
         ),
         lookbehind: !0,
         inside: { punctuation: /\./ },
@@ -1005,7 +1096,11 @@ Prism.languages.clike = {
       string: /[\s\S]+/,
     },
   },
-  'triple-quoted-string': { pattern: /(?:[rub]|rb|br)?("""|''')[\s\S]*?\1/i, greedy: !0, alias: 'string' },
+  'triple-quoted-string': {
+    pattern: /(?:[rub]|rb|br)?("""|''')[\s\S]*?\1/i,
+    greedy: !0,
+    alias: 'string',
+  },
   string: { pattern: /(?:[rub]|rb|br)?("|')(?:\\.|(?!\1)[^\\\r\n])*\1/i, greedy: !0 },
   function: { pattern: /((?:^|\s)def[ \t]+)[a-zA-Z_]\w*(?=\s*\()/g, lookbehind: !0 },
   'class-name': { pattern: /(\bclass\s+)\w+/i, lookbehind: !0 },
@@ -1022,7 +1117,8 @@ Prism.languages.clike = {
   operator: /[-+%=]=?|!=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,
   punctuation: /[{}[\];(),.:]/,
 }),
-  (Prism.languages.python['string-interpolation'].inside.interpolation.inside.rest = Prism.languages.python),
+  (Prism.languages.python['string-interpolation'].inside.interpolation.inside.rest =
+    Prism.languages.python),
   (Prism.languages.py = Prism.languages.python);
 !(function () {
   if ('undefined' != typeof self && self.Prism && self.document && document.querySelector) {
@@ -1086,7 +1182,8 @@ Prism.languages.clike = {
   }
   function c(e) {
     return (
-      !(!e || !/pre/i.test(e.nodeName)) && (!!e.hasAttribute('data-line') || !(!e.id || !Prism.util.isActive(e, s)))
+      !(!e || !/pre/i.test(e.nodeName)) &&
+      (!!e.hasAttribute('data-line') || !(!e.id || !Prism.util.isActive(e, s)))
     );
   }
   function d(u, e, c) {
@@ -1115,7 +1212,9 @@ Prism.languages.clike = {
       var t = e.split('-'),
         n = +t[0],
         i = +t[1] || n,
-        r = u.querySelector('.line-highlight[data-range="' + e + '"]') || document.createElement('div');
+        r =
+          u.querySelector('.line-highlight[data-range="' + e + '"]') ||
+          document.createElement('div');
       if (
         (m.push(function () {
           r.setAttribute('aria-hidden', 'true'),
@@ -1216,13 +1315,19 @@ Prism.languages.clike = {
       n = void 0;
     window.addEventListener('resize', function () {
       (e.assumeViewportIndependence && n === window.innerWidth) ||
-        ((n = window.innerWidth), u(Array.prototype.slice.call(document.querySelectorAll('pre.' + o))));
+        ((n = window.innerWidth),
+        u(Array.prototype.slice.call(document.querySelectorAll('pre.' + o))));
     }),
       Prism.hooks.add('complete', function (e) {
         if (e.code) {
           var n = e.element,
             t = n.parentNode;
-          if (t && /pre/i.test(t.nodeName) && !n.querySelector('.line-numbers-rows') && Prism.util.isActive(n, o)) {
+          if (
+            t &&
+            /pre/i.test(t.nodeName) &&
+            !n.querySelector('.line-numbers-rows') &&
+            Prism.util.isActive(n, o)
+          ) {
             n.classList.remove(o), t.classList.add(o);
             var i,
               r = e.code.match(a),
@@ -1232,7 +1337,8 @@ Prism.languages.clike = {
               (i.className = 'line-numbers-rows'),
               (i.innerHTML = l),
               t.hasAttribute('data-start') &&
-                (t.style.counterReset = 'linenumber ' + (parseInt(t.getAttribute('data-start'), 10) - 1)),
+                (t.style.counterReset =
+                  'linenumber ' + (parseInt(t.getAttribute('data-start'), 10) - 1)),
               e.element.appendChild(i),
               u([t]),
               Prism.hooks.run('line-numbers', e);
@@ -1258,11 +1364,16 @@ Prism.languages.clike = {
           if (n && t) {
             var i = e.querySelector('.line-numbers-sizer'),
               r = n.textContent.split(a);
-            i || (((i = document.createElement('span')).className = 'line-numbers-sizer'), n.appendChild(i)),
+            i ||
+              (((i = document.createElement('span')).className = 'line-numbers-sizer'),
+              n.appendChild(i)),
               (i.innerHTML = '0'),
               (i.style.display = 'block');
             var s = i.getBoundingClientRect().height;
-            return (i.innerHTML = ''), { element: e, lines: r, lineHeights: [], oneLinerHeight: s, sizer: i };
+            return (
+              (i.innerHTML = ''),
+              { element: e, lines: r, lineHeights: [], oneLinerHeight: s, sizer: i }
+            );
           }
         })
         .filter(Boolean);
@@ -1309,7 +1420,11 @@ Prism.languages.clike = {
           var r = c.exec(n);
           if (r) {
             for (
-              var o = 6 <= (n = r[1]).length ? 2 : 1, e = n.length / o, s = 1 == o ? 1 / 15 : 1 / 255, t = [], i = 0;
+              var o = 6 <= (n = r[1]).length ? 2 : 1,
+                e = n.length / o,
+                s = 1 == o ? 1 / 15 : 1 / 255,
+                t = [],
+                i = 0;
               i < e;
               i++
             ) {
@@ -1338,7 +1453,8 @@ Prism.languages.clike = {
       ];
     Prism.hooks.add('wrap', function (n) {
       if ('color' === n.type || 0 <= n.classes.indexOf('color')) {
-        for (var r, o = n.content, e = o.split(a).join(''), s = 0, t = f.length; s < t && !r; s++) r = f[s](e);
+        for (var r, o = n.content, e = o.split(a).join(''), s = 0, t = f.length; s < t && !r; s++)
+          r = f[s](e);
         if (!r) return;
         var i =
           '<span class="inline-color-wrapper"><span class="inline-color" style="background-color:' +
@@ -1363,13 +1479,18 @@ Prism.languages.clike = {
                 t = s && s[1],
                 i = s && s[2],
                 a = e
-                  .replace(/^(?:\b|\B-[a-z]{1,10}-)(?:repeating-)?(?:linear|radial)-gradient\(|\)$/g, '')
+                  .replace(
+                    /^(?:\b|\B-[a-z]{1,10}-)(?:repeating-)?(?:linear|radial)-gradient\(|\)$/g,
+                    '',
+                  )
                   .split(/\s*,\s*/);
               return 0 <= i.indexOf('linear')
                 ? (r[e] = (function (e, s, t) {
                     var i = '180deg';
                     return (
-                      /^(?:-?(?:\d+(?:\.\d+)?|\.\d+)(?:deg|rad)|to\b|top|right|bottom|left)/.test(t[0]) &&
+                      /^(?:-?(?:\d+(?:\.\d+)?|\.\d+)(?:deg|rad)|to\b|top|right|bottom|left)/.test(
+                        t[0],
+                      ) &&
                         (i = t.shift()).indexOf('to ') < 0 &&
                         (0 <= i.indexOf('top')
                           ? (i =
@@ -1392,7 +1513,8 @@ Prism.languages.clike = {
                           : e &&
                             (0 <= i.indexOf('deg')
                               ? (i = 90 - parseFloat(i) + 'deg')
-                              : 0 <= i.indexOf('rad') && (i = Math.PI / 2 - parseFloat(i) + 'rad'))),
+                              : 0 <= i.indexOf('rad') &&
+                                (i = Math.PI / 2 - parseFloat(i) + 'rad'))),
                       s + '(' + i + ',' + t.join(',') + ')'
                     );
                   })(t, i, a))
@@ -1410,7 +1532,9 @@ Prism.languages.clike = {
                         var n = t.shift().split(/\s+/);
                         !n[0] || ('circle' !== n[0] && 'ellipse' !== n[0]) || (a = n.shift()),
                           n[0] && (r = n.shift()),
-                          'cover' === r ? (r = 'farthest-corner') : 'contain' === r && (r = 'clothest-side');
+                          'cover' === r
+                            ? (r = 'farthest-corner')
+                            : 'contain' === r && (r = 'clothest-side');
                       }
                       return s + '(' + a + ' ' + r + ' at ' + i + ',' + t.join(',') + ')';
                     }
@@ -1431,7 +1555,7 @@ Prism.languages.clike = {
                 '*',
                 function () {
                   this._elt.innerHTML = '<div></div>';
-                }
+                },
               );
             }),
           tokens: {
@@ -1463,13 +1587,15 @@ Prism.languages.clike = {
                 lang: 'stylus',
                 before: 'func',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
               },
               {
                 lang: 'stylus',
                 before: 'func',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
               },
             ],
           },
@@ -1507,8 +1633,9 @@ Prism.languages.clike = {
               },
               '*',
               function () {
-                this._elt.innerHTML = '<svg viewBox="0 0 64 64"><circle r="16" cy="32" cx="32"></circle></svg>';
-              }
+                this._elt.innerHTML =
+                  '<svg viewBox="0 0 64 64"><circle r="16" cy="32" cx="32"></circle></svg>';
+              },
             );
           },
           tokens: { angle: /(?:\b|\B-|(?=\B\.))(?:\d+(?:\.\d+)?|\.\d+)(?:deg|g?rad|turn)\b/i },
@@ -1522,7 +1649,11 @@ Prism.languages.clike = {
               root: Prism.languages.markup && Prism.languages.markup.tag.inside['attr-value'],
             },
             sass: [
-              { lang: 'sass', inside: 'inside', root: Prism.languages.sass && Prism.languages.sass['property-line'] },
+              {
+                lang: 'sass',
+                inside: 'inside',
+                root: Prism.languages.sass && Prism.languages.sass['property-line'],
+              },
               {
                 lang: 'sass',
                 before: 'operator',
@@ -1536,13 +1667,15 @@ Prism.languages.clike = {
                 lang: 'stylus',
                 before: 'func',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
               },
               {
                 lang: 'stylus',
                 before: 'func',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
               },
             ],
           },
@@ -1550,7 +1683,11 @@ Prism.languages.clike = {
         color: {
           create: function () {
             new Prism.plugins.Previewer('color', function (e) {
-              return (this.style.backgroundColor = ''), (this.style.backgroundColor = e), !!this.style.backgroundColor;
+              return (
+                (this.style.backgroundColor = ''),
+                (this.style.backgroundColor = e),
+                !!this.style.backgroundColor
+              );
             });
           },
           tokens: { color: [Prism.languages.css.hexcode].concat(Prism.languages.css.color) },
@@ -1570,7 +1707,11 @@ Prism.languages.clike = {
                 inside: 'inside',
                 root: Prism.languages.sass && Prism.languages.sass['variable-line'],
               },
-              { lang: 'sass', inside: 'inside', root: Prism.languages.sass && Prism.languages.sass['property-line'] },
+              {
+                lang: 'sass',
+                inside: 'inside',
+                root: Prism.languages.sass && Prism.languages.sass['property-line'],
+              },
             ],
             scss: !1,
             stylus: [
@@ -1578,13 +1719,15 @@ Prism.languages.clike = {
                 lang: 'stylus',
                 before: 'hexcode',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
               },
               {
                 lang: 'stylus',
                 before: 'hexcode',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
               },
             ],
           },
@@ -1608,7 +1751,7 @@ Prism.languages.clike = {
                 })),
                   this.querySelector('path').setAttribute(
                     'd',
-                    'M0,100 C' + s[0] + ',' + s[1] + ', ' + s[2] + ',' + s[3] + ', 100,0'
+                    'M0,100 C' + s[0] + ',' + s[1] + ', ' + s[2] + ',' + s[3] + ', 100,0',
                   );
                 var t = this.querySelectorAll('line');
                 return (
@@ -1623,7 +1766,7 @@ Prism.languages.clike = {
               function () {
                 this._elt.innerHTML =
                   '<svg viewBox="-20 -20 140 140" width="100" height="100"><defs><marker id="prism-previewer-easing-marker" viewBox="0 0 4 4" refX="2" refY="2" markerUnits="strokeWidth"><circle cx="2" cy="2" r="1.5" /></marker></defs><path d="M0,100 C20,50, 40,30, 100,0" /><line x1="0" y1="100" x2="20" y2="50" marker-start="url(#prism-previewer-easing-marker)" marker-end="url(#prism-previewer-easing-marker)" /><line x1="100" y1="0" x2="40" y2="30" marker-start="url(#prism-previewer-easing-marker)" marker-end="url(#prism-previewer-easing-marker)" /></svg>';
-              }
+              },
             );
           },
           tokens: {
@@ -1642,7 +1785,11 @@ Prism.languages.clike = {
                 before: 'punctuation',
                 root: Prism.languages.sass && Prism.languages.sass['variable-line'],
               },
-              { lang: 'sass', inside: 'inside', root: Prism.languages.sass && Prism.languages.sass['property-line'] },
+              {
+                lang: 'sass',
+                inside: 'inside',
+                root: Prism.languages.sass && Prism.languages.sass['property-line'],
+              },
             ],
             scss: !0,
             stylus: [
@@ -1650,13 +1797,15 @@ Prism.languages.clike = {
                 lang: 'stylus',
                 before: 'hexcode',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
               },
               {
                 lang: 'stylus',
                 before: 'hexcode',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
               },
             ],
           },
@@ -1669,13 +1818,17 @@ Prism.languages.clike = {
                 var s = parseFloat(e),
                   t = e.match(/[a-z]+$/i);
                 return (
-                  !(!s || !t) && ((t = t[0]), (this.querySelector('circle').style.animationDuration = 2 * s + t), !0)
+                  !(!s || !t) &&
+                  ((t = t[0]),
+                  (this.querySelector('circle').style.animationDuration = 2 * s + t),
+                  !0)
                 );
               },
               '*',
               function () {
-                this._elt.innerHTML = '<svg viewBox="0 0 64 64"><circle r="16" cy="32" cx="32"></circle></svg>';
-              }
+                this._elt.innerHTML =
+                  '<svg viewBox="0 0 64 64"><circle r="16" cy="32" cx="32"></circle></svg>';
+              },
             );
           },
           tokens: { time: /(?:\b|\B-|(?=\B\.))(?:\d+(?:\.\d+)?|\.\d+)m?s\b/i },
@@ -1689,7 +1842,11 @@ Prism.languages.clike = {
               root: Prism.languages.markup && Prism.languages.markup.tag.inside['attr-value'],
             },
             sass: [
-              { lang: 'sass', inside: 'inside', root: Prism.languages.sass && Prism.languages.sass['property-line'] },
+              {
+                lang: 'sass',
+                inside: 'inside',
+                root: Prism.languages.sass && Prism.languages.sass['property-line'],
+              },
               {
                 lang: 'sass',
                 before: 'operator',
@@ -1703,13 +1860,15 @@ Prism.languages.clike = {
                 lang: 'stylus',
                 before: 'hexcode',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['property-declaration'].inside,
               },
               {
                 lang: 'stylus',
                 before: 'hexcode',
                 inside: 'rest',
-                root: Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
+                root:
+                  Prism.languages.stylus && Prism.languages.stylus['variable-declaration'].inside,
               },
             ],
           },
@@ -1759,7 +1918,9 @@ Prism.languages.clike = {
       }
     }),
     (n.prototype.mouseout = function () {
-      this._token.removeEventListener('mouseout', this._mouseout, !1), (this._token = null), this.hide();
+      this._token.removeEventListener('mouseout', this._mouseout, !1),
+        (this._token = null),
+        this.hide();
     }),
     (n.prototype.show = function () {
       if ((this._elt || this.init(), this._token))
@@ -1810,7 +1971,7 @@ Prism.languages.clike = {
               e.check(s);
             });
           },
-          !1
+          !1,
         );
     }),
     (Prism.plugins.Previewer = n),
@@ -1926,7 +2087,11 @@ Prism.languages.clike = {
         var r = t.replace(/-(\w)/g, function (e, n) {
           return n.toUpperCase();
         });
-        'normalize' !== t && 'setDefaults' !== r && n[t] && this[r] && (e = this[r].call(this, e, n[t]));
+        'normalize' !== t &&
+          'setDefaults' !== r &&
+          n[t] &&
+          this[r] &&
+          (e = this[r].call(this, e, n[t]));
       }
       return e;
     },
@@ -1994,11 +2159,13 @@ Prism.languages.clike = {
                 var s = r[l];
                 s == e.element
                   ? (a = !0)
-                  : '#text' === s.nodeName && (a ? (o += s.nodeValue) : (i += s.nodeValue), t.removeChild(s), --l);
+                  : '#text' === s.nodeName &&
+                    (a ? (o += s.nodeValue) : (i += s.nodeValue), t.removeChild(s), --l);
               }
               if (e.element.children.length && Prism.plugins.KeepMarkup) {
                 var c = i + e.element.innerHTML + o;
-                (e.element.innerHTML = n.normalize(c, e.settings)), (e.code = e.element.textContent);
+                (e.element.innerHTML = n.normalize(c, e.settings)),
+                  (e.code = e.element.textContent);
               } else (e.code = i + e.code + o), (e.code = n.normalize(e.code, e.settings));
             }
           } else e.code = n.normalize(e.code, e.settings);
@@ -2020,9 +2187,11 @@ Prism.languages.clike = {
           n.__listenerAdded ||
             (n.addEventListener('mousedown', function () {
               var e = n.querySelector('code');
-              Array.prototype.slice.call(e.querySelectorAll('.brace-selected')).forEach(function (e) {
-                e.classList.remove('brace-selected');
-              });
+              Array.prototype.slice
+                .call(e.querySelectorAll('.brace-selected'))
+                .forEach(function (e) {
+                  e.classList.remove('brace-selected');
+                });
             }),
             Object.defineProperty(n, '__listenerAdded', { value: !0 }));
           var o = Array.prototype.slice.call(t.querySelectorAll('span.token.punctuation')),
@@ -2064,7 +2233,8 @@ Prism.languages.clike = {
             l.forEach(function (e) {
               e.open
                 ? (e.element.classList.add('brace-level-' + ((r % 12) + 1)), r++)
-                : ((r = Math.max(0, r - 1)), e.element.classList.add('brace-level-' + ((r % 12) + 1)));
+                : ((r = Math.max(0, r - 1)),
+                  e.element.classList.add('brace-level-' + ((r % 12) + 1)));
             });
         }
       }
