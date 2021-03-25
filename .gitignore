@@ -3,6 +3,8 @@ config
 .eslintignore
 .eslintrc.json
 .vscode
+.prettierignore
+.prettierrc.js
 .idea
 source/requests.rest
 README.txt
