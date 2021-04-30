@@ -1,6 +1,7 @@
 # coding-website-project
-Strona z bazą danych (MongoDB) pozwalająca na stworzenie konta i umieszczanie kodu w różnych językach
-Fullstack website based on MongoDB Cluster, that allows user to create an account, add "forms" with highlighted code and preview other's forms.
+Fullstack website based on MongoDB Cluster, that allows user to create an account, add "forms" with highlighted code and preview other's forms.</br>
+Strona z bazą danych (MongoDB) pozwalająca na stworzenie konta i umieszczanie kodu w różnych językach<br/>
+#### Link to application, deployed in heroku cloud service: [coding-website-project](https://coding-web-project-rzepa.herokuapp.com/home/page1)
 
 ## Table of contents
 * [General info](#general-info)
