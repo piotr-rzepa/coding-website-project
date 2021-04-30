@@ -3,7 +3,7 @@
 export class Validator {
   static regExpName = /^[a-zA-Z_]{3,8}\d{0,2}$/;
   static regExpEmail = /^[\w]+@{1}[\w]+.{1}[\w]{2,}/;
-  static regExpPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
+  static regExpPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!$%^&*-]).{8,20}$/;
 
   static #isValid(element) {
     element.classList.remove('is-invalid');
