@@ -130,7 +130,7 @@
   const changePassword = async (message = '', validator) => {
     try {
       const response = await Swal.mixin({
-        input: 'text',
+        input: 'password',
         confirmButtonText: 'Next &rarr;',
         showCancelButton: true,
         progressSteps: ['1', '2', '3'],
