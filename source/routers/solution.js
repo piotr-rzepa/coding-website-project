@@ -40,6 +40,8 @@ router.get('/solution/:id', async (req, res) => {
 });
 
 router.get('/solutions/all', async (req, res) => {
+  const searchedTitle = req.query.title;
+  const regex = new RegExp(searchedTitle, 'i');
   try {
     let solutions;
     //Brak podanego języka - pobieramy wszystkie (posortowane)
@@ -56,12 +58,12 @@ router.get('/solutions/all', async (req, res) => {
         .skip(parseInt(req.query.skip))
         .sort({ createdAt: -1 });
     else if (!req.query.lang && req.query.title) {
-      solutions = await Solution.find({ title: req.query.title })
+      solutions = await Solution.find({ title: { $regex: regex } })
         .limit(parseInt(req.query.limit))
         .skip(parseInt(req.query.skip))
         .sort({ createdAt: -1 });
     } else {
-      solutions = await Solution.find({ title: req.query.title, language: req.query.lang })
+      solutions = await Solution.find({ title: { $regex: regex }, language: req.query.lang })
         .limit(parseInt(req.query.limit))
         .skip(parseInt(req.query.skip))
         .sort({ createdAt: -1 });
