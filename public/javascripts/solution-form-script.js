@@ -98,11 +98,14 @@ form.onsubmit = async (e) => {
   };
   console.log(body);
 
-  await fetch('/user/solution/add', {
+  const response = await fetch('/user/solution/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
   });
+  if (response.status === 200) {
+    alert('Pomyślnie dodano nowy kod!');
+  }
 };
