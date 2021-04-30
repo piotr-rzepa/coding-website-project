@@ -125,13 +125,17 @@
 
         const lista = document.createElement('ul');
         lista.classList.add('pagination', 'justify-content-center');
+        //* +2 ponieważ pierwszy i ostatni "blok" to przyciski previous i next
         for (let i = 0; i < Math.ceil(result.length / 8) + 2; ++i) {
           const listItem = document.createElement('li');
           listItem.classList.add('page-item');
+          //Poprzednia strona
           if (i === 0)
             listItem.innerHTML = `<a href="/home/page${encodeURIComponent(skip - 1 === 0 ? 1 : skip - 1)}" class="page-link">Previous</a>`;
+            //Kolejna strona
           else if (i === Math.ceil(result.length / 8) + 1)
-            listItem.innerHTML = `<a href="/home/page${encodeURIComponent(skip + 1)}" class="page-link">Next</a>`;
+            listItem.innerHTML = `<a href="/home/page${encodeURIComponent(skip + 1 === Math.ceil(result.length / 8) + 2 ? skip : skip + 1 )}" class="page-link">Next</a>`;
+            //Wszystko pomiędzy
           else {
             listItem.innerHTML = `<a href="/home/page${encodeURIComponent(i)}" class="page-link">${i}</a>`;
             if (i === skip) listItem.classList.add('active');
