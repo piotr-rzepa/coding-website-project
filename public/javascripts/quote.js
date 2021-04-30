@@ -9,7 +9,7 @@ const getRandomQuote = (async function () {
   try {
     //Pobieramy odpowiedź z API z cytatem
     let response = await fetch(
-      'https://private-anon-39966be192-goquotes.apiary-proxy.com/api/v1/random?count=1',
+      'https://private-anon-c7d96dd79c-goquotes.apiary-proxy.com/api/v1/random/1?type=&val=',
     );
     //Parsujemy aby otrzymać JSON
     const quoteObject = await response.json();
